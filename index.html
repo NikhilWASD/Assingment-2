@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" ng-app='ShoppingListCheckOff'>
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+    </style>
+  </head>
+
+<body>
+  <div class="container">
+    <h1>Shopping List Check Off</h1>
+
+    <div class="row">
+      <!-- To Buy List -->
+      <div ng-controller='ToBuyController as toBuy' class="col-md-6">
+        <h2>To Buy:</h2>
+        <ul>
+          <li ng-repeat="item in toBuy.items">
+            Buy {{ item.quantity }} {{ item.name }}
+            <button ng-click="toBuy.buy($index)" class="btn btn-default">
+              <span ng-if="item.name!=='Fifa 18'" class="glyphicon glyphicon-ok"></span>
+              <img src="1.jpg" style="width:80px" ng-if="item.name==='Fifa 18'"> Bought
+            </button>
+          </li>
+        </ul>
+        <div ng-if="toBuy.items.length == 0" class="emptyMessage">Everything is bought!</div>
+      </div>
+
+      <!-- Already Bought List -->
+      <div ng-controller='AlreadyBoughtController as bought' class="col-md-6">
+        <h2>Already Bought:</h2>
+        <ul>
+          <li ng-repeat="item in bought.items">
+            Bought {{ item.quantity }} {{ item.name }}
+          </li>
+        </ul>
+        <div ng-if="bought.items.length == 0" class="emptyMessage">Nothing bought yet.</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
